@@ -1,0 +1,2 @@
+module lockedme_prototype {
+}
