@@ -8,18 +8,18 @@ import java.util.Scanner;
 public class LockedMe_Prototype {
 	
 	static String Dir;
-	File foldername;
+	File folder_name;
 	
 	//DIRECTORY
 	public LockedMe_Prototype()
 	{
 		Dir = System.getProperty("user.dir");
-		foldername = new File(Dir+"/files");
+		folder_name = new File(Dir+"/files");
 		
-		if(!foldername.exists())
+		if(!folder_name.exists())
 		{
-			foldername.mkdirs();
-			System.out.println("Directory : " + foldername.getAbsolutePath());
+			folder_name.mkdirs();
+			System.out.println("Directory : " + folder_name.getAbsolutePath());
 		}
 		
 	}
@@ -81,7 +81,7 @@ public class LockedMe_Prototype {
                 case 'a' : {
                     System.out.print("-> Enter File Name to Add : ");
                     String filename = sc.next().trim().toLowerCase();
-                    addFile(filename);
+                    retriveFile(filename);
                     break;
                 }
                 case 'b' : {
@@ -115,10 +115,10 @@ public class LockedMe_Prototype {
 
 /////////////////////////////////FOR SEARCHING FILES/////////////////////////////////////
 	private void searchFile(String filename) {
-        String[] list = foldername.list();
+        String[] list = folder_name.list();
         for (String file: list) {
             if (filename.equals(file)) {
-                System.out.println("Your Searched file " + filename + " exists at " + foldername);
+                System.out.println("Your Searched file " + filename + " exists at " + folder_name);
                 return;
             }
         }
@@ -127,11 +127,11 @@ public class LockedMe_Prototype {
 
 ////////////////////////////////////FOR DELETING FILES////////////////////////////////////
 	private void deleteFile(String filename) {
-        File filepath = new File(foldername +"/"+filename);
-        String[] list = foldername.list();
+        File filepath = new File(folder_name +"/"+filename);
+        String[] list = folder_name.list();
         for (String file: list) {
             if (filename.equals(file) && filepath.delete()) {
-                System.out.println("Your Selected File " + filename + " is deleted from " + foldername);
+                System.out.println("Your Selected File " + filename + " is deleted from " + folder_name);
                 return;
             }
         }
@@ -139,26 +139,26 @@ public class LockedMe_Prototype {
     }
 
 //////////////////////////////////FOR ADDING FILES///////////////////////////////////////
-	private void addFile(String filename) throws IOException {
-        File filepath = new File(foldername +"/"+filename);
-        String[] list = foldername.list();
+	private void retriveFile(String filename) throws IOException {
+        File filepath = new File(folder_name +"/"+filename);
+        String[] list = folder_name.list();
         for (String file: list) {
             if (filename.equalsIgnoreCase(file)) {
-                System.out.println("File " + filename + " already exists at " + foldername);
+                System.out.println("File " + filename + " already exists at " + folder_name);
                 return;
             }
         }
         filepath.createNewFile();
-        System.out.println("File "+filename+" added to "+ foldername+" successfully");
+        System.out.println("File "+filename+" added to "+ folder_name+" successfully");
     }
 
 ////////////////////////////////////FOR VIEWING FILES/////////////////////////////////////
 	private void ViewFiles() {
-		if (foldername.list().length==0)  //EMPTY DIRECTORY
+		if (folder_name.list().length==0)  //EMPTY DIRECTORY
             System.out.println("The folder is empty");
         else {                            // (!EMPTY) DIRECTORY
-            String[] list = foldername.list();
-            System.out.println("The files in "+ foldername +" are :");
+            String[] list = folder_name.list();
+            System.out.println("The files in "+ folder_name +" are :");
             Arrays.sort(list);            //SORTING THE ARRAY AS ASCENDING
             for (String str:list) {
                 System.out.println(str);
